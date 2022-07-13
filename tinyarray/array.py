@@ -11,6 +11,10 @@ class array:
     def shape(self : array)-> int: return self._shape
     def numpy(self : array) -> np.ndarray: return np.array(self._data)
 
+    def __len__(self : array) -> int: return len(self._data)
+
+    def __iter__(self : array): return self._data.__iter__()
+
     def __getitem__(self : array, idx: Union[slice, int]) -> Union[float, int]:
         if isinstance(idx, int):
             idx = idx if idx >= 0 else idx + self._shape
@@ -30,11 +34,9 @@ class array:
         else:
             raise NotImplementedError("This type of indexing has not been implemented")
 
-    def __repr__(self: array, /) -> str:
-        return "array(" + self._data.__str__() + ")"
+    def __repr__(self: array, /) -> str: return "array(" + self._data.__str__() + ")"
 
-    def __str__(self: array, /) -> str:
-        return "array(" + self._data.__str__() + ")"
+    def __str__(self: array, /) -> str: return "array(" + self._data.__str__() + ")"
 
     def __add__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
         if isinstance(other, int) or isinstance(other, float):
@@ -148,6 +150,7 @@ class array:
     def sum(self : array) -> Union[float, int]: return sum(self._data)
     def mean(self : array) -> Union[float, int]: return sum(self._data)/self._shape
     def sqrt(self : array) -> array: return array([math.sqrt(a) for a in self._data])
+    def dot(self: array, other) -> Union[float, int]: return sum(self*other)
 
     @classmethod
     def ones(cls : array, N: int) -> array: return cls([1 for _ in range(N)])
