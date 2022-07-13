@@ -1,17 +1,15 @@
 from typing import Union, List
 import numpy as np
 import array
+import math
 
 class array:
     def __init__(self : array, data : List[Union[int, float]]) -> None:
         self._data = data
         self._shape  = len(data) # one dimensional array
 
-    def shape(self : array)-> int:
-        return self._shape
-
-    def numpy(self : array) :
-        return np.array(self._data)
+    def shape(self : array)-> int: return self._shape
+    def numpy(self : array) -> np.ndarray: return np.array(self._data)
 
     def __getitem__(self : array, idx: Union[slice, int]) -> Union[float, int]:
         if isinstance(idx, int):
@@ -142,9 +140,17 @@ class array:
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
 
+    def __pow__(self : array, other : Union[int, float]) -> array:
+        res = [self._data[i].__pow__(other) for i in range(len(self._data))]
+        return array(res)
+
+
+    def sum(self : array) -> Union[float, int]: return sum(self._data)
+    def mean(self : array) -> Union[float, int]: return sum(self._data)/self._shape
+    def sqrt(self : array) -> array: return array([math.sqrt(a) for a in self._data])
+
     @classmethod
     def ones(cls : array, N: int) -> array: return cls([1 for _ in range(N)])
-
     @classmethod
     def zeros(cls : array, N : int) -> array: return cls([0 for _ in range(N)])
 

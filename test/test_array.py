@@ -21,6 +21,19 @@ class TestTinyArray(unittest.TestCase):
         t2 = x.numpy()
         np.testing.assert_allclose(t1, t2)
 
+    def test_sum(self):
+        x = ta.array([1,2,3,4])
+        ans = x.sum()
+        self.assertEqual(ans, 10)
+        x = ta.array([1.,2.,3.,4.])
+        ans = x.sum()
+        self.assertEqual(ans, 10.)
+
+    def test_mean(self):
+        x = ta.array([1, 3, 5, 7])
+        ans = x.mean()
+        self.assertEqual(ans, 4)
+
 
 
 if __name__ == "__main__":
