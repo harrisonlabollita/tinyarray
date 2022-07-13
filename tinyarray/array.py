@@ -1,5 +1,5 @@
 from typing import Union, List
-
+import numpy as np
 import array
 
 class array:
@@ -9,6 +9,9 @@ class array:
 
     def shape(self : array)-> int:
         return self._shape
+
+    def numpy(self : array) :
+        return np.array(self._data)
 
     def __getitem__(self : array, idx: Union[slice, int]) -> Union[float, int]:
         if isinstance(idx, int):
@@ -54,10 +57,10 @@ class array:
             return array(res)
         elif isinstance(other, array):
             assert other.shape() == self._shape, f"[ERROR] incompatible shapes {other.shape()} != {self._shape}" 
-            return array([self._data[i].__add(other[i]) for i in range(len(self._data))])
+            return array([self._data[i].__add__(other[i]) for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(other) == self._shape, f"[ERROR] incompatible shapes {len(other)} != {self._shape}" 
-            return array([self._data[i].__sub__(other[i]) for i in range(len(self._data))])
+            return array([self._data[i].__add__(other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
     
