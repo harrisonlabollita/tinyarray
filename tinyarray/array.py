@@ -148,6 +148,14 @@ class array:
         res = [self._data[i].__pow__(other) for i in range(len(self._data))]
         return array(res)
 
+    def append(self : array, other: Union[int, float, List[Union[int, float]]]) -> None:
+        if isinstance(other, int) or isinstance(other, float): self._data.append(other)
+        elif hasattr(other, "__iter__"):
+            for o in other: self._data.append(o)
+        else:
+            raise Exception(f"{other} can not be appended to an array object")
+
+
     def sum(self : array) -> Union[float, int]: return sum(self._data)
     def mean(self : array) -> Union[float, int]: return sum(self._data)/self._shape
     def sqrt(self : array) -> array: return array([math.sqrt(a) for a in self._data])
