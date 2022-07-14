@@ -10,9 +10,6 @@ class array:
         self._data = data
         self._shape  = len(data) # one dimensional array
 
-    def shape(self : array)-> int: return self._shape
-    def numpy(self : array) -> np.ndarray: return np.array(self._data)
-
     def __len__(self : array) -> int: return len(self._data)
 
     def __iter__(self : array): return self._data.__iter__()
@@ -154,6 +151,14 @@ class array:
             for o in other: self._data.append(o)
         else:
             raise Exception(f"{other} can not be appended to an array object")
+
+    def shape(self : array)-> int: return self._shape
+    def numpy(self : array) -> np.ndarray: return np.array(self._data)
+    def dtype(self : array) -> Union[float, int] : return type(self._data[0])
+
+    def pad(self : array, N : int) -> None :
+        if self.dtype() == float: self._data.extend([0.0 for _ in range(N)]); self._shape = len(self._data)
+        if self.dtype() == int: self._data.extend([0 for _ in range(N)]); self._shape = len(self._data)
 
 
     def sum(self : array) -> Union[float, int]: return sum(self._data)
