@@ -1,7 +1,9 @@
 from typing import Union, List
 import numpy as np
-import array
 import math
+import random
+
+import array
 
 class array:
     def __init__(self : array, data : List[Union[int, float]]) -> None:
@@ -146,15 +148,16 @@ class array:
         res = [self._data[i].__pow__(other) for i in range(len(self._data))]
         return array(res)
 
-
     def sum(self : array) -> Union[float, int]: return sum(self._data)
     def mean(self : array) -> Union[float, int]: return sum(self._data)/self._shape
     def sqrt(self : array) -> array: return array([math.sqrt(a) for a in self._data])
     def dot(self: array, other) -> Union[float, int]: return sum(self*other)
+    def max(self: array) -> Union[float, int]: return max(self._data)
+    def min(self: array) -> Union[float, int]: return min(self._data)
 
     @classmethod
     def ones(cls : array, N: int) -> array: return cls([1 for _ in range(N)])
     @classmethod
     def zeros(cls : array, N : int) -> array: return cls([0 for _ in range(N)])
-
-
+    @classmethod
+    def uniform(cls : array, N :int, a :float=0.0, b : float = 1.0) -> array: return cls([random.uniform(a,b) for _ in range(N)])
