@@ -163,6 +163,9 @@ class array:
         if self.dtype == float: self._data.extend([0.0 for _ in range(N)]); self._shape = len(self._data)
         if self.dtype == int: self._data.extend([0 for _ in range(N)]); self._shape = len(self._data)
 
+    def argsort(self : array) -> array: return array(sorted(range(len(self._data)), key=self._data.__getitem__))
+    def sort(self: array) -> array: return array(sorted(self._data))
+
     def sum(self : array) -> Union[float, int]: return sum(self._data)
     def mean(self : array) -> Union[float, int]: return sum(self._data)/self._shape
     def sqrt(self : array) -> array: return array([math.sqrt(a) for a in self._data])
