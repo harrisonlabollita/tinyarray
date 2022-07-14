@@ -42,10 +42,10 @@ class array:
             res = [self._data[i].__add__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape() == self._shape, f"[ERROR] incompatible shapes {other.shape()} != {self._shape}" 
+            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
             return array([self._data[i].__add__(other[i]) for i in range(len(self._data))])
         elif isinstance(other, List):
-            assert len(other) == self._shape, f"[ERROR] incompatible shapes {len(other)} != {self._shape}" 
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
             return array([self._data[i].__add__(other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
@@ -55,10 +55,10 @@ class array:
             res = [self._data[i].__add__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape() == self._shape, f"[ERROR] incompatible shapes {other.shape()} != {self._shape}" 
+            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
             return array([self._data[i].__add__(other[i]) for i in range(len(self._data))])
         elif isinstance(other, List):
-            assert len(other) == self._shape, f"[ERROR] incompatible shapes {len(other)} != {self._shape}" 
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
             return array([self._data[i].__add__(other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
@@ -68,10 +68,10 @@ class array:
             res = [self._data[i].__sub__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape() == self._shape, f"[ERROR] incompatible shapes {other.shape()} != {self._shape}" 
+            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
             return array([self._data[i].__sub__(other[i])for i in range(len(self._data))])
         elif isinstance(other, List):
-            assert len(other) == self._shape, f"[ERROR] incompatible shapes {len(other)} != {self._shape}" 
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
             return array([self._data[i].__sub__(other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
@@ -81,10 +81,10 @@ class array:
             res = [self._data[i].__sub__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape() == self._shape, f"[ERROR] incompatible shapes {other.shape()} != {self._shape}" 
+            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
             return array([self._data[i].__sub__(other[i])for i in range(len(self._data))])
         elif isinstance(other, List):
-            assert len(other) == self._shape, f"[ERROR] incompatible shapes {len(other)} != {self._shape}" 
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
             return array([self._data[i].__sub__(other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
@@ -94,10 +94,10 @@ class array:
             res = [self._data[i].__mul__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape() == self._shape, f"[ERROR] incompatible shapes {other.shape()} != {self._shape}" 
+            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
             return array([self._data[i].__mul__(other[i]) for i in range(len(self._data))])
         elif isinstance(other, List):
-            assert len(other) == self._shape, f"[ERROR] incompatible shapes {len(other)} != {self._shape}" 
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
             return array([self._data[i].__mul__(other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
@@ -107,10 +107,10 @@ class array:
             res = [self._data[i].__mul__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape() == self._shape, f"[ERROR] incompatible shapes {other.shape()} != {self._shape}" 
+            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
             return array([self._data[i].__mul__(other[i]) for i in range(len(self._data))])
         elif isinstance(other, List):
-            assert len(other) == self._shape, f"[ERROR] incompatible shapes {len(other)} != {self._shape}" 
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
             return array([self._data[i].__mul__(other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
@@ -120,10 +120,10 @@ class array:
             res = [self._data[i] / other for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape() == self._shape, f"[ERROR] incompatible shapes {other.shape()} != {self._shape}" 
+            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
             return array([self._data[i]  / other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
-            assert len(other) == self._shape, f"[ERROR] incompatible shapes {len(other)} != {self._shape}" 
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
             return array([self._data[i]  / other[i] for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
@@ -133,10 +133,10 @@ class array:
             res = [self._data[i] / (other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape() == self._shape, f"[ERROR] incompatible shapes {other.shape()} != {self._shape}" 
+            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
             return array([self._data[i] / other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
-            assert len(other) == self._shape, f"[ERROR] incompatible shapes {len(other)} != {self._shape}" 
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
             return array([self._data[i] / other[i] for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
