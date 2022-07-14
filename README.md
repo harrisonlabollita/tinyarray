@@ -14,6 +14,6 @@ pip install .
 ## Running tests
 
 ```shell
-	python -m unittest
+python -m unittest
 ```
 
