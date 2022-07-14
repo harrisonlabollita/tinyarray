@@ -1,17 +1,19 @@
 name : unit tests
 
 on : [push]
-test:
-  name: tests
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout Code
-      uses: actions/checkout@v2
-    - name: set up python 3
-      uses: actions/setup-python@v2
-      with:
-        python-version 3.8
-    - name: install deps
-      run: pip install -e '.[testing]'
-    - name: run unittest
-      run: python -m unittest
+
+jobs:
+  test:
+    name: tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+      - name: set up python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version 3.8
+      - name: install deps
+        run: pip install -e '.[testing]'
+      - name: run unittest
+        run: python -m unittest
