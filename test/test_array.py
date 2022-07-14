@@ -24,9 +24,9 @@ class TestTinyArray(unittest.TestCase):
     
     def test_div(self):
         x = ta.array([1,2,3,4])
-        y = x*2
+        y = x/2
         t1 = y.numpy()
-        x *= 2
+        x /= 2
         t2 = x.numpy()
         np.testing.assert_allclose(t1, t2)
     
