@@ -1,6 +1,6 @@
 # tinyarray
 
-Lightweight arrays for Python. 
+If Python had arrays, I imagine they would be like this. 
 
 Kind of like numpy arrays but a bit more lightweight (and not as much capability). No C backend.
 

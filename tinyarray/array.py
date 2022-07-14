@@ -35,7 +35,7 @@ class array:
 
     def __repr__(self: array, /) -> str: return "array(" + self._data.__str__() + ")"
 
-    def __str__(self: array, /) -> str: return "array(" + self._data.__str__() + ")"
+    def __str__(self: array, /) -> str: return self._data.__str__()
 
     def __add__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
         if isinstance(other, int) or isinstance(other, float):
@@ -151,19 +151,22 @@ class array:
             for o in other: self._data.append(o)
         else:
             raise Exception(f"{other} can not be appended to an array object")
-
+    @property
     def shape(self : array)-> int: return self._shape
-    def numpy(self : array) -> np.ndarray: return np.array(self._data)
+
+    @property
     def dtype(self : array) -> Union[float, int] : return type(self._data[0])
 
-    def pad(self : array, N : int) -> None :
-        if self.dtype() == float: self._data.extend([0.0 for _ in range(N)]); self._shape = len(self._data)
-        if self.dtype() == int: self._data.extend([0 for _ in range(N)]); self._shape = len(self._data)
+    def numpy(self : array) -> np.ndarray: return np.array(self._data)
 
+    def pad(self : array, N : int) -> None :
+        if self.dtype == float: self._data.extend([0.0 for _ in range(N)]); self._shape = len(self._data)
+        if self.dtype == int: self._data.extend([0 for _ in range(N)]); self._shape = len(self._data)
 
     def sum(self : array) -> Union[float, int]: return sum(self._data)
     def mean(self : array) -> Union[float, int]: return sum(self._data)/self._shape
     def sqrt(self : array) -> array: return array([math.sqrt(a) for a in self._data])
+    def exp(self : array) -> array: return array([math.exp(a) for a in self._data])
     def dot(self: array, other) -> Union[float, int]: return sum(self*other)
     def max(self: array) -> Union[float, int]: return max(self._data)
     def min(self: array) -> Union[float, int]: return min(self._data)
