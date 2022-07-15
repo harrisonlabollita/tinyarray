@@ -57,6 +57,28 @@ class TestTinyArray(unittest.TestCase):
         ans = x.mean()
         self.assertEqual(ans, 4)
 
+    def test_reverse(self):
+        random.seed(1234)
+        x = ta.array.uniform(10).sort()
+
+        t1 = ta.array([0.007491470058587191, 
+                   0.08393822683708396, 
+                   0.23680977536311776, 
+                   0.4407325991753527, 
+                   0.5822275730589491, 
+                   0.6715634814879851, 
+                   0.7664809327917963, 
+                   0.9109759624491242, 
+                   0.939268997363764, 
+                   0.9664535356921388]).numpy()
+        y = x.reverse().numpy()
+        np.testing.assert_allclose(y,t1[::-1])
+
+    def test_prod(self):
+        x = ta.array([1, 3, 5, 7])
+        ans = x.prod()
+        self.assertEqual(ans, 105)
+
     def test_sort(self):
         random.seed(1234)
         x = ta.array.uniform(10)

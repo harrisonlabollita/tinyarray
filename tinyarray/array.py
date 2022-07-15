@@ -173,6 +173,12 @@ class array:
     def dot(self: array, other) -> Union[float, int]: return sum(self*other)
     def max(self: array) -> Union[float, int]: return max(self._data)
     def min(self: array) -> Union[float, int]: return min(self._data)
+    def reverse(self : array) -> array: return array(self._data[::-1])
+    def prod(self: array) -> Union[float, int]: 
+        res = self._data[0]
+        for i in range(1, self.shape):
+            res *= self._data[i]
+        return res
 
     @classmethod
     def ones(cls : array, N: int) -> array: return cls([1 for _ in range(N)])
