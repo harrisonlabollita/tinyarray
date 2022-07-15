@@ -1,4 +1,4 @@
-i.__mul__(mport numpy as np
+import numpy as np
 from tinyarray import array as ta
 import unittest
 import random
@@ -75,6 +75,16 @@ class TestTinyArray(unittest.TestCase):
         t2 = ta.array([2, 7, 9, 1, 5, 6, 8, 3, 4, 0]).numpy()
         np.testing.assert_allclose(x1, t1)
         np.testing.assert_allclose(x2, t2)
+
+    def test_complex(self):
+        random.seed(1234)
+        x = ta.array.uniform(10)
+        y = ta.array.uniform(10)*1j
+        z = x + y
+        t1 = z.numpy()
+        x += y
+        t2 = x.numpy()
+        np.testing.assert_allclose(t1, t2)
 
 
 
