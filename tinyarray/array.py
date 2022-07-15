@@ -6,7 +6,7 @@ import random
 import array
 
 class array:
-    def __init__(self : array, data : List[Union[int, float]]) -> None:
+    def __init__(self : array, data : List[Union[int, float, complex]]) -> None:
         self._data = data
         self._shape  = len(data) # one dimensional array
 
@@ -14,7 +14,7 @@ class array:
 
     def __iter__(self : array): return self._data.__iter__()
 
-    def __getitem__(self : array, idx: Union[slice, int]) -> Union[float, int]:
+    def __getitem__(self : array, idx: Union[slice, int]) -> Union[float, int, complex]:
         if isinstance(idx, int):
             idx = idx if idx >= 0 else idx + self._shape
             return self._data[idx]
@@ -23,7 +23,7 @@ class array:
         else:
             raise NotImplementedError("This type of indexing has not been implemented")
 
-    def __setitem__(self : array, idx : Union[slice, int], value : Union[float,int]) -> None:
+    def __setitem__(self : array, idx : Union[slice, int], value : Union[float,int, complex]) -> None:
         if isinstance(idx, int):
             idx = idx if idx >= 0 else idx + self._shape
             self._data[idx] = value
@@ -37,8 +37,8 @@ class array:
 
     def __str__(self: array, /) -> str: return self._data.__str__()
 
-    def __add__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
-        if isinstance(other, int) or isinstance(other, float):
+    def __add__(self : array, other : Union[int, float, List[Union[int, float, complex]]], /) -> array:
+        if isinstance(other, (int, float, complex)):
             res = [self._data[i].__add__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
@@ -50,8 +50,8 @@ class array:
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
 
-    def __iadd__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
-        if isinstance(other, int) or isinstance(other, float):
+    def __iadd__(self : array, other : Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
+        if isinstance(other, (int, float, complex)):
             res = [self._data[i].__add__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
@@ -63,8 +63,8 @@ class array:
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
     
-    def __sub__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
-        if isinstance(other, int) or isinstance(other, float):
+    def __sub__(self : array, other : Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
+        if isinstance(other, (int, float, complex)):
             res = [self._data[i].__sub__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
@@ -77,7 +77,7 @@ class array:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
     
     def __isub__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
-        if isinstance(other, int) or isinstance(other, float):
+        if isinstance(other, (int, float, complex)):
             res = [self._data[i].__sub__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
@@ -90,7 +90,7 @@ class array:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
     
     def __mul__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
-        if isinstance(other, int) or isinstance(other, float):
+        if isinstance(other, (int, float, complex)):
             res = [self._data[i].__mul__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
@@ -103,7 +103,7 @@ class array:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
 
     def __imul__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
-        if isinstance(other, int) or isinstance(other, float):
+        if isinstance(other, (int, float, complex)):
             res = [self._data[i].__mul__(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
@@ -115,38 +115,38 @@ class array:
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
 
-    def __truediv__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
-        if isinstance(other, int) or isinstance(other, float):
-            res = [self._data[i] / other for i in range(len(self._data))]
+    def __truediv__(self : array, other : Union[int, float, complex, List[Union[int, complex, float]]], /) -> array:
+        if isinstance(other, (int, float, complex)):
+            res = [self._data[i].__mul___(1/other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
             assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
-            return array([self._data[i]  / other[i] for i in range(len(self._data))])
+            return array([self._data[i].__mul__(1/other[i]) for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
-            return array([self._data[i]  / other[i] for i in range(len(self._data))])
+            return array([self._data[i].__mul__(1/other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
 
-    def __itruediv__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
-        if isinstance(other, int) or isinstance(other, float):
-            res = [self._data[i] / (other) for i in range(len(self._data))]
+    def __itruediv__(self : array, other : Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
+        if isinstance(other, (int, float, complex)):
+            res = [self._data[i].__mul__(1/other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
             assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
-            return array([self._data[i] / other[i] for i in range(len(self._data))])
+            return array([self._data[i].__mul__(1/other[i]) for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
-            return array([self._data[i] / other[i] for i in range(len(self._data))])
+            return array([self._data[i].__mul__(1/other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
 
-    def __pow__(self : array, other : Union[int, float]) -> array:
+    def __pow__(self : array, other : Union[int, float, complex]) -> array:
         res = [self._data[i].__pow__(other) for i in range(len(self._data))]
         return array(res)
 
-    def append(self : array, other: Union[int, float, List[Union[int, float]]]) -> None:
-        if isinstance(other, int) or isinstance(other, float): self._data.append(other)
+    def append(self : array, other: Union[int, float, complex, List[Union[int, float, complex]]]) -> None:
+        if isinstance(other, (float, int, complex)): self._data.append(other)
         elif hasattr(other, "__iter__"):
             for o in other: self._data.append(o)
         else:
@@ -155,24 +155,31 @@ class array:
     def shape(self : array)-> int: return self._shape
 
     @property
-    def dtype(self : array) -> Union[float, int] : return type(self._data[0])
+    def dtype(self : array) -> Union[float, int, complex] : return type(self._data[0])
 
     def numpy(self : array) -> np.ndarray: return np.array(self._data)
 
     def pad(self : array, N : int) -> None :
         if self.dtype == float: self._data.extend([0.0 for _ in range(N)]); self._shape = len(self._data)
         if self.dtype == int: self._data.extend([0 for _ in range(N)]); self._shape = len(self._data)
+        if self.dtype == complex: self._data.extend([0+0j for _ in range(N)]); self._shape = len(self._data)
 
     def argsort(self : array) -> array: return array(sorted(range(len(self._data)), key=self._data.__getitem__))
     def sort(self: array) -> array: return array(sorted(self._data))
 
-    def sum(self : array) -> Union[float, int]: return sum(self._data)
-    def mean(self : array) -> Union[float, int]: return sum(self._data)/self._shape
-    def sqrt(self : array) -> array: return array([math.sqrt(a) for a in self._data])
-    def exp(self : array) -> array: return array([math.exp(a) for a in self._data])
-    def dot(self: array, other) -> Union[float, int]: return sum(self*other)
-    def max(self: array) -> Union[float, int]: return max(self._data)
-    def min(self: array) -> Union[float, int]: return min(self._data)
+    def abs(self : array) -> array: return array(map(abs, self._data))
+    def sum(self : array) -> Union[float, int, complex]: return sum(self._data)
+    def mean(self : array) -> Union[float, int, complex]: return sum(self._data)/self._shape
+    def sqrt(self : array) -> array: return array([a**0.5 for a in self._data])
+    def dot(self: array, other) -> Union[float, int, complex]: return sum(self*other)
+    def max(self: array) -> Union[float, int, complex]: return max(self._data)
+    def min(self: array) -> Union[float, int, complex]: return min(self._data)
+
+    def exp(self : array) -> array: 
+        if array.dtype is complex
+            return array([math.exp(a.real)*(math.cos(a.imag)+1j*math.sin(a.imag)) for a in self._data])
+        else:
+            return array([math.exp(a) for a in self._data])
 
     @classmethod
     def ones(cls : array, N: int) -> array: return cls([1 for _ in range(N)])
