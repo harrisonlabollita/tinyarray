@@ -39,110 +39,110 @@ class array:
 
     def __add__(self : array, other : Union[int, float, List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
-            res = [self._data[i].__add__(other) for i in range(len(self._data))]
+            res = [self._data[i] + other for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
             assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
-            return array([self._data[i].__add__(other[i]) for i in range(len(self._data))])
+            return array([self._data[i] + other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
-            return array([self._data[i].__add__(other[i]) for i in range(len(self._data))])
+            return array([self._data[i] + other[i] for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
 
     def __iadd__(self : array, other : Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
-            res = [self._data[i].__add__(other) for i in range(len(self._data))]
+            res = [self._data[i] + other for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
             assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
-            return array([self._data[i].__add__(other[i]) for i in range(len(self._data))])
+            return array([self._data[i] + other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
-            return array([self._data[i].__add__(other[i]) for i in range(len(self._data))])
+            return array([self._data[i] + other[i] for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
     
     def __sub__(self : array, other : Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
-            res = [self._data[i].__sub__(other) for i in range(len(self._data))]
+            res = [self._data[i] - other for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
             assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
-            return array([self._data[i].__sub__(other[i])for i in range(len(self._data))])
+            return array([self._data[i] - other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
-            return array([self._data[i].__sub__(other[i]) for i in range(len(self._data))])
+            return array([self._data[i] - other[i] for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
     
     def __isub__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
         if isinstance(other, (int, float, complex)):
-            res = [self._data[i].__sub__(other) for i in range(len(self._data))]
+            res = [self._data[i] - other for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
             assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
-            return array([self._data[i].__sub__(other[i])for i in range(len(self._data))])
+            return array([self._data[i] -other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
-            return array([self._data[i].__sub__(other[i]) for i in range(len(self._data))])
+            return array([self._data[i] - other[i] for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
     
-    def __mul__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
+    def __mul__(self : array, other : Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
-            res = [self._data[i].__mul__(other) for i in range(len(self._data))]
+            res = [self._data[i]*other for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
             assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
-            return array([self._data[i].__mul__(other[i]) for i in range(len(self._data))])
+            return array([self._data[i]*other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
-            return array([self._data[i].__mul__(other[i]) for i in range(len(self._data))])
+            return array([self._data[i]*other[i] for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
 
-    def __imul__(self : array, other : Union[int, float, List[Union[int, float]]], /) -> array:
+    def __imul__(self : array, other : Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
-            res = [self._data[i].__mul__(other) for i in range(len(self._data))]
+            res = [self._data[i]*other for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
             assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
-            return array([self._data[i].__mul__(other[i]) for i in range(len(self._data))])
+            return array([self._data[i]*other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
-            return array([self._data[i].__mul__(other[i]) for i in range(len(self._data))])
+            return array([self._data[i]*(other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
 
     def __truediv__(self : array, other : Union[int, float, complex, List[Union[int, complex, float]]], /) -> array:
         if isinstance(other, (int, float, complex)):
-            res = [self._data[i].__mul___(1/other) for i in range(len(self._data))]
+            res = [self._data[i]*(1/other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
             assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
-            return array([self._data[i].__mul__(1/other[i]) for i in range(len(self._data))])
+            return array([self._data[i]*(1/other[i]) for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
-            return array([self._data[i].__mul__(1/other[i]) for i in range(len(self._data))])
+            return array([self._data[i]*(1/other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
 
     def __itruediv__(self : array, other : Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
-            res = [self._data[i].__mul__(1/other) for i in range(len(self._data))]
+            res = [self._data[i]*(1/other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
             assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}" 
-            return array([self._data[i].__mul__(1/other[i]) for i in range(len(self._data))])
+            return array([self._data[i]*(1/other[i]) for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}" 
-            return array([self._data[i].__mul__(1/other[i]) for i in range(len(self._data))])
+            return array([self._data[i]*(1/other[i]) for i in range(len(self._data))])
         else:
             raise NotImplementedError(f"Type {type(other)} is not implemented!")
 
     def __pow__(self : array, other : Union[int, float, complex]) -> array:
-        res = [self._data[i].__pow__(other) for i in range(len(self._data))]
+        res = [self._data[i]**(other) for i in range(len(self._data))]
         return array(res)
 
     def append(self : array, other: Union[int, float, complex, List[Union[int, float, complex]]]) -> None:
@@ -176,7 +176,7 @@ class array:
     def min(self: array) -> Union[float, int, complex]: return min(self._data)
 
     def exp(self : array) -> array: 
-        if array.dtype is complex
+        if array.dtype is complex:
             return array([math.exp(a.real)*(math.cos(a.imag)+1j*math.sin(a.imag)) for a in self._data])
         else:
             return array([math.exp(a) for a in self._data])

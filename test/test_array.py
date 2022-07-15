@@ -1,4 +1,4 @@
-import numpy as np
+i.__mul__(mport numpy as np
 from tinyarray import array as ta
 import unittest
 import random
