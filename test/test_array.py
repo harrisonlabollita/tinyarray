@@ -98,6 +98,19 @@ class TestTinyArray(unittest.TestCase):
         np.testing.assert_allclose(x1, t1)
         np.testing.assert_allclose(x2, t2)
 
+    def test_find(self):
+        random.seed(1234)
+        x = ta.array.uniform(10)
+        t1 = x.find(0.5, func=lambda x, val: x >=val).numpy()
+        t2 = ta.array([0.9664535356921388, 0.9109759624491242, 
+                    0.939268997363764, 0.5822275730589491, 
+                    0.6715634814879851, 0.7664809327917963]).numpy()
+        np.testing.assert_allclose(t1, t2)
+
+        t1 = x.find(0.5, func=lambda x, val: x < val).numpy()
+        t2 = ta.array([0.4407325991753527, 0.007491470058587191, 0.08393822683708396, 0.23680977536311776]).numpy()
+        np.testing.assert_allclose(t1, t2)
+
 
 
 

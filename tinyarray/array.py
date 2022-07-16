@@ -166,6 +166,7 @@ class array:
     def argsort(self : array) -> array: return array(sorted(range(len(self._data)), key=self._data.__getitem__))
     def sort(self: array) -> array: return array(sorted(self._data))
 
+    def find(self: array, val, func = lambda x,val : x == val) -> array: return array([a for a in self._data if func(a,val)])
     def sum(self : array) -> Union[float, int]: return sum(self._data)
     def mean(self : array) -> Union[float, int]: return sum(self._data)/self._shape
     def sqrt(self : array) -> array: return array([math.sqrt(a) for a in self._data])
@@ -179,6 +180,8 @@ class array:
         for i in range(1, self.shape):
             res *= self._data[i]
         return res
+
+
 
     @classmethod
     def ones(cls : array, N: int) -> array: return cls([1 for _ in range(N)])
