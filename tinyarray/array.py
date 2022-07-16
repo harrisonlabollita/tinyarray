@@ -18,8 +18,10 @@ class array:
         if isinstance(idx, int):
             idx = idx if idx >= 0 else idx + self._shape
             return self._data[idx]
-        if isinstance(idx, slice):
+        elif isinstance(idx, slice):
             return array([self._data[i] for i in range(*idx.indices(len(self._data)))])
+        elif hasattr(idx, "__iter__"): # <- should this be better?
+            return array([self._data[i] for i in idx])
         else:
             raise NotImplementedError("This type of indexing has not been implemented")
 
