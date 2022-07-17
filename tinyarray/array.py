@@ -14,24 +14,34 @@ class array:
 
     def __iter__(self : array): return self._data.__iter__()
 
-    def __getitem__(self : array, idx: Union[slice, int]) -> Union[float, int]:
+    def __getitem__(self : array, idx: Union[slice, int, bool]) -> Union[float, int]:
         if isinstance(idx, int):
             idx = idx if idx >= 0 else idx + self._shape
             return self._data[idx]
         elif isinstance(idx, slice):
             return array([self._data[i] for i in range(*idx.indices(len(self._data)))])
         elif hasattr(idx, "__iter__"): # <- should this be better?
-            return array([self._data[i] for i in idx])
+            if isinstance(idx[0], bool):
+                return array([self._data[i] for i,ind in enumerate(idx) if ind])
+            elif isinstance(idx[0], int):
+                return array([self._data[i] for i in idx])
         else:
             raise NotImplementedError("This type of indexing has not been implemented")
 
-    def __setitem__(self : array, idx : Union[slice, int], value : Union[float,int]) -> None:
+    def __setitem__(self : array, idx : Union[slice, int, bool], value : Union[float,int]) -> None:
         if isinstance(idx, int):
             idx = idx if idx >= 0 else idx + self._shape
             self._data[idx] = value
-        if isinstance(idx, slice):
+        elif isinstance(idx, slice):
             for i in range(*idx.indices(len(self._data))):
                 self._data[i] = value
+        elif hasattr(idx, "__iter__"): # <- should this be better?
+            if isinstance(idx[0], bool):
+                for i, ind in enumerate(idx):
+                    if ind: self._data[i] = value
+            elif isinstance(idx[0], int):
+                for i in idx:
+                    self._data[i] = value
         else:
             raise NotImplementedError("This type of indexing has not been implemented")
 
@@ -145,6 +155,23 @@ class array:
 
     def __pow__(self : array, other : Union[int, float]) -> array:
         res = [self._data[i].__pow__(other) for i in range(len(self._data))]
+        return array(res)
+
+    def __lt__(self : array, other : Union[int, float]) -> array: 
+        #res = [a for a in self._data if a.__lt__(other)]
+        res = [a.__lt__(other) for a in self._data]
+        return array(res)
+    def __gt__(self : array, other : Union[int, float]) -> array: 
+        res = [a.__gt__(other) for a in self._data]
+        return array(res)
+    def __le__(self : array, other : Union[int, float]) -> array: 
+        res = [a.__le__(other) for a in self._data]
+        return array(res)
+    def __ge__(self : array, other : Union[int, float]) -> array: 
+        res = [a.__ge__(other) for a in self._data]
+        return array(res)
+    def __eq__(self : array, other : Union[int, float]) -> array: 
+        res = [a.__eq__(other) for a in self._data ]
         return array(res)
 
     def append(self : array, other: Union[int, float, List[Union[int, float]]]) -> None:
