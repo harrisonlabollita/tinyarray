@@ -18,6 +18,7 @@ x * 2                 # multiple 2 to the array x
 ```
 
 # Example in NumPy
+```python
 import numpy as np
 
 x = np.random.uniform(10) # uniformly distributed array of size 10
