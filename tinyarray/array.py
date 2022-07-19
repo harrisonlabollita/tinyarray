@@ -186,6 +186,9 @@ class array:
     @property
     def dtype(self : array) -> Union[float, int] : return type(self._data[0])
 
+    @property
+    def data(self : array) -> Union[float, int] : return self._data
+
     def numpy(self : array) -> np.ndarray: return np.array(self._data)
 
     def pad(self : array, N : int) -> None :
@@ -200,6 +203,7 @@ class array:
     def mean(self : array) -> Union[float, int]: return sum(self._data)/self._shape
     def sqrt(self : array) -> array: return array([math.sqrt(a) for a in self._data])
     def exp(self : array) -> array: return array([math.exp(a) for a in self._data])
+    def log(self : array) -> array: return array([math.log(a) for a in self._data])
     def dot(self: array, other) -> Union[float, int]: return sum(self*other)
     def max(self: array) -> Union[float, int]: return max(self._data)
     def min(self: array) -> Union[float, int]: return min(self._data)
@@ -209,7 +213,6 @@ class array:
         for i in range(1, self.shape):
             res *= self._data[i]
         return res
-
 
 
     @classmethod

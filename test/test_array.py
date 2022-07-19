@@ -123,6 +123,20 @@ class TestTinyArray(unittest.TestCase):
         t2 = x.find(0.5, func=lambda x, val: x < val).numpy()
         np.testing.assert_allclose(t1, t2)
 
+    def test_ops(self):
+        random.seed(1234)
+        x = ta.array.uniform(10)
+        t = x.numpy()
+        np.testing.assert_allclose(np.sqrt(t), 
+                                   x.sqrt().numpy())
+        np.testing.assert_allclose(np.log(t), 
+                                   x.log().numpy())
+        np.testing.assert_allclose(np.exp(t), 
+                                   x.exp().numpy())
+        np.testing.assert_allclose(np.min(t), 
+                                   x.min())
+        np.testing.assert_allclose(np.max(t), 
+                                   x.max())
 
 if __name__ == "__main__":
     unittest.main()
