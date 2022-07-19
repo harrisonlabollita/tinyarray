@@ -5,7 +5,7 @@ If Python had arrays, I imagine they would be like this.
 Kind of like numpy arrays but a bit more lightweight (and not as much capability). No C backend.
 
 
-# Example
+## Example
 ```python
 from tinyarray.array import array
 
@@ -17,7 +17,7 @@ x * 2                 # multiple 2 to the array x
 # and more!
 ```
 
-# Example in NumPy
+## Example in NumPy
 ```python
 import numpy as np
 
