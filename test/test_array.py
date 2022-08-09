@@ -98,6 +98,46 @@ class TestTinyArray(unittest.TestCase):
         np.testing.assert_allclose(x1, t1)
         np.testing.assert_allclose(x2, t2)
 
+    def test_complex(self):
+        random.seed(1234)
+        x = array.uniform(10)
+        y = array.uniform(10)*1j
+        z = x + y
+        t1 = z.numpy()
+        x += y
+        t2 = x.numpy()
+        np.testing.assert_allclose(t1, t2)
+
+    def test_sqrt_cpx(self):
+        random.seed(1234)
+        x = array.uniform(10)
+        y = array.uniform(10)*1j
+        z = x + y
+        
+        t1 = z.sqrt().numpy()
+        t2 = np.sqrt(z.numpy())
+        np.testing.assert_allclose(t1, t2)
+        
+    def test_exp_cpx(self):
+        random.seed(1234)
+        x = array.uniform(10)
+        y = array.uniform(10)*1j
+        z = x + y
+        
+        t1 = z.exp().numpy()
+        t2 = np.exp(z.numpy())
+        np.testing.assert_allclose(t1, t2)
+
+    def test_log_cpx(self):
+        random.seed(1234)
+        x = array.uniform(10)
+        y = array.uniform(10)*1j
+        z = x + y
+        t1 = z.log().numpy()
+        t2 = np.log(z.numpy())
+        np.testing.assert_allclose(t1, t2)
+
+
     def test_find(self):
         random.seed(1234)
         x =  array.uniform(10)
@@ -110,6 +150,7 @@ class TestTinyArray(unittest.TestCase):
         t1 = x.find(0.5, func=lambda x, val: x < val).numpy()
         t2 =  array([0.4407325991753527, 0.007491470058587191, 0.08393822683708396, 0.23680977536311776]).numpy()
         np.testing.assert_allclose(t1, t2)
+        
 
     def test_getitem(self):
         random.seed(1234)
