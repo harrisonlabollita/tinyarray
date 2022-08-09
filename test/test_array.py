@@ -86,6 +86,36 @@ class TestTinyArray(unittest.TestCase):
         t2 = x.numpy()
         np.testing.assert_allclose(t1, t2)
 
+    def test_sqrt_cpx(self):
+        random.seed(1234)
+        x = ta.array.uniform(10)
+        y = ta.array.uniform(10)*1j
+        z = x + y
+        
+        t1 = z.sqrt().numpy()
+        t2 = np.sqrt(z.numpy())
+        np.testing.assert_allclose(t1, t2)
+        
+    def test_exp_cpx(self):
+        random.seed(1234)
+        x = ta.array.uniform(10)
+        y = ta.array.uniform(10)*1j
+        z = x + y
+        
+        t1 = z.exp().numpy()
+        t2 = np.exp(z.numpy())
+        np.testing.assert_allclose(t1, t2)
+
+    def test_log_cpx(self):
+        random.seed(1234)
+        x = ta.array.uniform(10)
+        y = ta.array.uniform(10)*1j
+        z = x + y
+        t1 = z.log().numpy()
+        t2 = np.log(z.numpy())
+        np.testing.assert_allclose(t1, t2)
+
+
 
 
 
