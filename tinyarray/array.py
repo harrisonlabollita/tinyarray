@@ -30,6 +30,7 @@ class array:
             raise NotImplementedError(
                 "This type of indexing has not been implemented")
 
+
     def __setitem__(self: array, idx: Union[slice, int, bool], value: Union[float, int, complex]) -> None:
         if isinstance(idx, int):
             idx = idx if idx >= 0 else idx + self._shape
@@ -70,6 +71,7 @@ class array:
             raise NotImplementedError(
                 f"Type {type(other)} is not implemented!")
 
+
     def __iadd__(self: array, other: Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
             res = [self._data[i] + other
@@ -77,6 +79,7 @@ class array:
             return array(res)
         elif isinstance(other, array):
             assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}"
+
             return array([self._data[i] + other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(
@@ -117,6 +120,7 @@ class array:
         else:
             raise NotImplementedError(
                 f"Type {type(other)} is not implemented!")
+
 
     def __mul__(self: array, other: Union[int, float, complex,List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
