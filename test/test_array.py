@@ -78,8 +78,8 @@ class TestTinyArray(unittest.TestCase):
 
     def test_complex(self):
         random.seed(1234)
-        x = ta.array.uniform(10)
-        y = ta.array.uniform(10)*1j
+        x = array.uniform(10)
+        y = array.uniform(10)*1j
         z = x + y
         t1 = z.numpy()
         x += y
@@ -88,8 +88,8 @@ class TestTinyArray(unittest.TestCase):
 
     def test_sqrt_cpx(self):
         random.seed(1234)
-        x = ta.array.uniform(10)
-        y = ta.array.uniform(10)*1j
+        x = array.uniform(10)
+        y = array.uniform(10)*1j
         z = x + y
         
         t1 = z.sqrt().numpy()
@@ -98,8 +98,8 @@ class TestTinyArray(unittest.TestCase):
         
     def test_exp_cpx(self):
         random.seed(1234)
-        x = ta.array.uniform(10)
-        y = ta.array.uniform(10)*1j
+        x = array.uniform(10)
+        y = array.uniform(10)*1j
         z = x + y
         
         t1 = z.exp().numpy()
@@ -108,8 +108,8 @@ class TestTinyArray(unittest.TestCase):
 
     def test_log_cpx(self):
         random.seed(1234)
-        x = ta.array.uniform(10)
-        y = ta.array.uniform(10)*1j
+        x = array.uniform(10)
+        y = array.uniform(10)*1j
         z = x + y
         t1 = z.log().numpy()
         t2 = np.log(z.numpy())
