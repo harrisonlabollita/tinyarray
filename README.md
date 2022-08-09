@@ -1,5 +1,16 @@
 # tinyarray
 
+<div align="center">
+
+![tests](https://github.com/harrisonlabollita/tinyarray/actions/workflows/test.yml/badge.svg)
+![issues](https://img.shields.io/github/issues/harrisonlabollita/tinyarray)
+![forks](https://img.shields.io/github/forks/harrisonlabollita/tinyarray)
+![stars](https://img.shields.io/github/stars/harrisonlabollita/tinyarray)
+![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
+![license](https://img.shields.io/github/license/harrisonlabollita/tinyarray)
+	
+</div>
+
 If Python had arrays, I imagine they would be like this. 
 
 Kind of like numpy arrays but a bit more lightweight (and not as much capability). No C backend.
