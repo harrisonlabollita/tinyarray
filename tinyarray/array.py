@@ -61,7 +61,7 @@ class array:
                    for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}"
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}"
             return array([self._data[i] + other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(
@@ -78,7 +78,7 @@ class array:
                    for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}"
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}"
 
             return array([self._data[i] + other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
@@ -89,13 +89,15 @@ class array:
             raise NotImplementedError(
                 f"Type {type(other)} is not implemented!")
 
+    __radd__ = __add__
+
     def __sub__(self: array, other: Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
             res = [self._data[i] - other
                    for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}"
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}"
             return array([self._data[i] - other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(
@@ -104,6 +106,7 @@ class array:
         else:
             raise NotImplementedError(
                 f"Type {type(other)} is not implemented!")
+    __rsub__ = __sub__
 
     def __isub__(self: array, other: Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
@@ -111,7 +114,7 @@ class array:
                    for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}"
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}"
             return array([self._data[i] - other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(
@@ -128,7 +131,7 @@ class array:
                    for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}"
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}"
             return array([self._data[i] * other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(
@@ -137,6 +140,8 @@ class array:
         else:
             raise NotImplementedError(
                 f"Type {type(other)} is not implemented!")
+    
+    __rmul__ = __mul__
 
     def __imul__(self: array, other: Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
@@ -144,7 +149,7 @@ class array:
                    for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}"
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}"
             return array([self._data[i] * other[i] for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(
@@ -153,13 +158,14 @@ class array:
         else:
             raise NotImplementedError(
                 f"Type {type(other)} is not implemented!")
+
 
     def __truediv__(self: array, other: Union[int, float, complex, List[Union[int, float, complex]]], /) -> array:
         if isinstance(other, (int, float, complex)):
             res = [self._data[i] * 1/(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}"
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}"
             return array([self._data[i] * 1/(other[i]) for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(
@@ -169,12 +175,14 @@ class array:
             raise NotImplementedError(
                 f"Type {type(other)} is not implemented!")
 
+    __rtruediv__ = __truediv__
+
     def __itruediv__(self: array, other: Union[int, float, List[Union[int, float]]], /) -> array:
         if isinstance(other, (int, float, complex)):
             res = [self._data[i] * 1/(other) for i in range(len(self._data))]
             return array(res)
         elif isinstance(other, array):
-            assert other.shape == self._shape, f"incompatible shapes {other.shape} != {self._shape}"
+            assert len(other) == self._shape, f"incompatible shapes {len(other)} != {self._shape}"
             return array([self._data[i] * 1/(other[i]) for i in range(len(self._data))])
         elif isinstance(other, List):
             assert len(
@@ -228,8 +236,9 @@ class array:
         else:
             raise Exception(f"{other} can not be appended to an array object")
 
-    @property
-    def shape(self: array) -> int: return self._shape
+    # Removing shape allows for tinyarray's arrays to be "plottable" by matplotlib
+    #@property
+    #def shape(self: array) -> tuple: return tuple([self._shape])
 
     @property
     def dtype(self: array) -> Union[float, int, complex]: return type(self._data[0])
@@ -308,7 +317,7 @@ class array:
 
     def prod(self: array) -> Union[float, int, complex]:
         res = self._data[0]
-        for i in range(1, self.shape):
+        for i in range(1, len(self)):
             res *= self._data[i]
         return res
     
