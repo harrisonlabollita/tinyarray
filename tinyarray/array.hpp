@@ -1,5 +1,7 @@
 #pragma once
 #include <iostream>
+#include <string>
+#include <sstream>
 
 namespace tinyarray {
 
@@ -24,6 +26,8 @@ public:
   auto operator-=(T other);
   auto operator/(T other);
   auto operator/=(T other);
+
+  std::string to_string();
 };
 
 // define constructors
@@ -90,6 +94,15 @@ template <typename T, size_t R> auto array<T, R>::operator/=(T other) {
     res[i] /= other;
   }
   return res;
+};
+
+template <typename T, size_t R> 
+std::string array<T,R>::to_string() {
+    std::stringstream out;
+    out << "tinyarray (";
+    for (int i = 0; i < _size; ++i) out << (i == 0 ? "" : " " ) << data[i]; 
+    out << ")";
+    return out.str();
 };
 
 } // namespace tinyarray
