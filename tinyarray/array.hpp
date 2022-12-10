@@ -20,12 +20,12 @@ public:
 
   // declare operators
   T &operator[](int index);
-  auto operator+(T other);
-  auto operator+=(T other);
-  auto operator-(T other);
-  auto operator-=(T other);
-  auto operator/(T other);
-  auto operator/=(T other);
+  auto operator+(T &other);
+  void operator+=(T &other);
+  auto operator-(T &other);
+  void operator-=(T &other);
+  auto operator/(T &other);
+  void operator/=(T &other);
 
   std::string to_string();
 };
@@ -46,7 +46,7 @@ template <typename T, size_t R> T &array<T, R>::operator[](int index) {
   return data[index];
 };
 
-template <typename T, size_t R> auto array<T, R>::operator+(T other) {
+template <typename T, size_t R> auto array<T, R>::operator+(T &other) {
   auto res = array<T, R>(data);
   for (auto i = 0; i < res.size(); i++) {
     res[i] += other;
@@ -54,31 +54,25 @@ template <typename T, size_t R> auto array<T, R>::operator+(T other) {
   return res;
 };
 
-template <typename T, size_t R> auto array<T, R>::operator+=(T other) {
-  auto res = array<T, R>(data);
-  for (auto i = 0; i < res.size(); i++) {
-    res[i] += other;
+template <typename T, size_t R> void array<T, R>::operator+=(T &other) {
+  for (auto i = 0; i < data.size(); i++) {
+    data[i] += other;
   }
-  return res;
 };
 
-template <typename T, size_t R> auto array<T, R>::operator-(T other) {
-  auto res = array<T, R>(data);
-  for (auto i = 0; i < res.size(); i++) {
-    res[i] -= other;
+template <typename T, size_t R> auto array<T, R>::operator-(T &other) {
+  for (auto i = 0; i < data.size(); i++) {
+    data[i] -= other;
   }
-  return res;
 };
 
-template <typename T, size_t R> auto array<T, R>::operator-=(T other) {
-  auto res = array<T, R>(data);
-  for (auto i = 0; i < res.size(); i++) {
-    res[i] -= other;
+template <typename T, size_t R> void array<T, R>::operator-=(T &other) {
+  for (auto i = 0; i < data.size(); i++) {
+    data[i] -= other;
   }
-  return res;
 };
 
-template <typename T, size_t R> auto array<T, R>::operator/(T other) {
+template <typename T, size_t R> auto array<T, R>::operator/(T &other) {
   auto res = array<T, R>(data);
   static_assert(other > 0, "Divide by zero error!");
   for (auto i = 0; i < res.size(); i++) {
@@ -87,13 +81,11 @@ template <typename T, size_t R> auto array<T, R>::operator/(T other) {
   return res;
 };
 
-template <typename T, size_t R> auto array<T, R>::operator/=(T other) {
-  auto res = array<T, R>(data);
+template <typename T, size_t R> void array<T, R>::operator/=(T &other) {
   static_assert(other > 0, "Divide by zero error!");
-  for (auto i = 0; i < res.size(); i++) {
-    res[i] /= other;
+  for (auto i = 0; i < data.size(); i++) {
+    data[i] /= other;
   }
-  return res;
 };
 
 template <typename T, size_t R> 
