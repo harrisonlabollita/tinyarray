@@ -16,7 +16,7 @@ public:
   array(storage_t data);
   array();
 
-  int size() const { return _size; }
+  constexpr long size() const { return _size; }
 
   // declare operators
   T &operator[](int index);
