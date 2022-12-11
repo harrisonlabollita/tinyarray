@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <random>
 
 namespace tinyarray {
 
@@ -20,12 +21,6 @@ public:
 
   // declare operators
   T &operator[](int index);
-  auto operator+(T &other);
-  void operator+=(T &other);
-  auto operator-(T &other);
-  void operator-=(T &other);
-  auto operator/(T &other);
-  void operator/=(T &other);
 
   std::string to_string();
 };
@@ -46,47 +41,6 @@ template <typename T, size_t R> T &array<T, R>::operator[](int index) {
   return data[index];
 };
 
-template <typename T, size_t R> auto array<T, R>::operator+(T &other) {
-  auto res = array<T, R>(data);
-  for (auto i = 0; i < res.size(); i++) {
-    res[i] += other;
-  }
-  return res;
-};
-
-template <typename T, size_t R> void array<T, R>::operator+=(T &other) {
-  for (auto i = 0; i < data.size(); i++) {
-    data[i] += other;
-  }
-};
-
-template <typename T, size_t R> auto array<T, R>::operator-(T &other) {
-  for (auto i = 0; i < data.size(); i++) {
-    data[i] -= other;
-  }
-};
-
-template <typename T, size_t R> void array<T, R>::operator-=(T &other) {
-  for (auto i = 0; i < data.size(); i++) {
-    data[i] -= other;
-  }
-};
-
-template <typename T, size_t R> auto array<T, R>::operator/(T &other) {
-  auto res = array<T, R>(data);
-  static_assert(other > 0, "Divide by zero error!");
-  for (auto i = 0; i < res.size(); i++) {
-    res[i] /= other;
-  }
-  return res;
-};
-
-template <typename T, size_t R> void array<T, R>::operator/=(T &other) {
-  static_assert(other > 0, "Divide by zero error!");
-  for (auto i = 0; i < data.size(); i++) {
-    data[i] /= other;
-  }
-};
 
 template <typename T, size_t R> 
 std::string array<T,R>::to_string() {
@@ -96,5 +50,17 @@ std::string array<T,R>::to_string() {
     out << ")";
     return out.str();
 };
+
+// random array
+template <size_t N>
+array<double,N> rand() {
+
+    array<double,N> out;
+
+    auto static gen = std::mt19937(std::random_device{}());
+    auto static dist  = std::uniform_real_distribution<>(0.0, 1.0);
+    for (int i=0; i<N; ++i) out[i] = dist(gen);
+    return out;
+}
 
 } // namespace tinyarray

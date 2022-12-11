@@ -18,11 +18,17 @@ int main(void) {
   auto z2 = x / y;
   std::cout << z2.to_string() << std::endl;
 
-  //auto z2 = x + 1.0;
-  //std::cout << z2.to_string() << std::endl;
+  auto z3 = x + 0.5;
+  std::cout << z3.to_string() << std::endl;
 
-  //auto z3 = 1.0 + x;
-  //std::cout << z3.to_string() << std::endl;
+  auto z4 = 1.4 + x;
+  std::cout << z4.to_string() << std::endl;
 
+  auto A = tinyarray::rand<10>();
+  std::cout << A.to_string() << std::endl;
+  auto B = tinyarray::rand<10>();
+  std::cout << B.to_string() << std::endl;
+  auto C = A + B;
+  std::cout << C.to_string() << std::endl;
   return 0;
 }
