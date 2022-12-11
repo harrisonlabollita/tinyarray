@@ -24,11 +24,13 @@ int main(void) {
   auto z4 = 1.4 + x;
   std::cout << z4.to_string() << std::endl;
 
-  auto A = tinyarray::rand<10>();
-  std::cout << A.to_string() << std::endl;
-  auto B = tinyarray::rand<10>();
-  std::cout << B.to_string() << std::endl;
+  auto A = tinyarray::rand<1000>();
+  auto B = tinyarray::ones<double, 1000>();
+
   auto C = A + B;
-  std::cout << C.to_string() << std::endl;
+  std::cout << C[0] << std::endl;
+  std::cout << C[1] << std::endl;
+  std::cout << C[-2] << std::endl;
+  std::cout << C[-50] << std::endl;
   return 0;
 }

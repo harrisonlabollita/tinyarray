@@ -38,7 +38,12 @@ template <typename T, size_t R> array<T, R>::array() {
 
 // define operators
 template <typename T, size_t R> T &array<T, R>::operator[](int index) {
-  return data[index];
+    if(index >= 0) {
+      return data[index];
+    } else {
+        auto N = data.size();
+        return data[N+index];
+    }
 };
 
 
@@ -50,6 +55,24 @@ std::string array<T,R>::to_string() {
     out << ")";
     return out.str();
 };
+
+// ones array
+template <typename T, size_t N>
+array<T,N> ones() {
+    static_assert(std::is_arithmetic<T>::value, "Not an arithmetic type");
+    array<T,N> out;
+    for (int i=0; i<N; ++i) out[i] = (T)1;
+    return out;
+}
+
+// zeros array
+template <typename T, size_t N>
+array<T,N> zeros() {
+    static_assert(std::is_arithmetic<T>::value, "Not an arithmetic type");
+    array<T,N> out;
+    for (int i=0; i<N; ++i) out[i] = (T)0;
+    return out;
+}
 
 // random array
 template <size_t N>
